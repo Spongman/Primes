@@ -57,23 +57,15 @@ class prime_sieve
 
       void runSieve()
       {
-          INDEX factor = 3;
           INDEX q = sqrt(sieveSize);
 
-          while (factor <= q)
+          for (INDEX factor = 3; factor <= q; factor += 2)
           {
-              for (INDEX num = factor; num < sieveSize; num += 2)
+              if (Bits[factor])
               {
-                  if (Bits[num])
-                  {
-                      factor = num;
-                      break;
-                  }
+                  for (INDEX num = factor * factor; num < sieveSize; num += factor * 2)
+                      Bits[num] = false;
               }
-              for (INDEX num = factor * factor; num < sieveSize; num += factor * 2)
-                  Bits[num] = false;
-
-              factor += 2;            
           }
       }
 
