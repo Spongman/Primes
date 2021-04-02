@@ -16,9 +16,11 @@ using namespace std::chrono;
 
 class prime_sieve
 {
+  using INDEX = unsigned long;
+
   private:
 
-      long sieveSize = 0;
+      INDEX sieveSize = 0;
       vector<bool> Bits;
       const std::map<const long, const int> myDict = 
       {
@@ -55,12 +57,12 @@ class prime_sieve
 
       void runSieve()
       {
-          int factor = 3;
-          int q = sqrt(sieveSize);
+          INDEX factor = 3;
+          INDEX q = sqrt(sieveSize);
 
           while (factor <= q)
           {
-              for (int num = factor; num < sieveSize; num += 2)
+              for (INDEX num = factor; num < sieveSize; num += 2)
               {
                   if (Bits[num])
                   {
@@ -68,7 +70,7 @@ class prime_sieve
                       break;
                   }
               }
-              for (int num = factor * factor; num < sieveSize; num += factor * 2)
+              for (INDEX num = factor * factor; num < sieveSize; num += factor * 2)
                   Bits[num] = false;
 
               factor += 2;            
@@ -81,7 +83,7 @@ class prime_sieve
               printf("2, ");
 
           int count = 1;
-          for (int num = 3; num <= sieveSize; num+=2)
+          for (INDEX num = 3; num <= sieveSize; num+=2)
           {
               if (Bits[num])
               {
@@ -107,7 +109,7 @@ class prime_sieve
       int countPrimes()
       {
           int count = 1;
-          for (int i = 3; i < sieveSize; i+=2)
+          for (INDEX i = 3; i < sieveSize; i+=2)
               if (Bits[i])
                   count++;
           return count;
