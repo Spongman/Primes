@@ -47,7 +47,7 @@ class prime_sieve
    public:
 
       prime_sieve(long n) 
-        : Bits(n, true), sieveSize(n)
+        : Bits(n/2, true), sieveSize(n)
       {
       }
 
@@ -61,10 +61,10 @@ class prime_sieve
 
           for (INDEX factor = 3; factor <= q; factor += 2)
           {
-              if (Bits[factor])
+              if (Bits[(factor-1)/2])
               {
                   for (INDEX num = factor * factor; num < sieveSize; num += factor * 2)
-                      Bits[num] = false;
+                      Bits[(num-1)/2] = false;
               }
           }
       }
@@ -77,7 +77,7 @@ class prime_sieve
           int count = 1;
           for (INDEX num = 3; num <= sieveSize; num+=2)
           {
-              if (Bits[num])
+              if (Bits[(num-1)/2])
               {
                   if (showResults)
                       printf("%d, ", num);
@@ -102,7 +102,7 @@ class prime_sieve
       {
           int count = 1;
           for (INDEX i = 3; i < sieveSize; i+=2)
-              if (Bits[i])
+              if (Bits[(i-1)/2])
                   count++;
           return count;
       }
